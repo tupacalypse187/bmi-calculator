@@ -10,7 +10,7 @@ pipeline {
                 steps {
                     echo "Steps to execute SCA"
                 withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'SonarToken') {
-                    sh 'sonar-scanner -Dsonar.projectVersion=1.0 -Dsonar.projectKey=react-bmi-app -Dsonar.sources=src'
+                    sh 'sonar-scanner -Dsonar.projectVersion=1.0 -Dsonar.projectKey=react-bmi-app -Dsonar.sources=src -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.LAUNCH_DIAGNOSTICS=true'
                 }
                     waitForQualityGate(abortPipeline: true, credentialsId: 'SonarToken')
                 }
