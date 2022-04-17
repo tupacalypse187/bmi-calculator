@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage('CI') {
+            agent {
+                docker { image 'node:16.13.1-alpine' }
+                }
+    stages {
+        stage('NPM') {
+            steps {
+                sh 'ls -a'
+                sh 'rm -rf build.zip'
+                sh 'rm -rf build'
+                sh 'node --version'
+                sh 'npm ci'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'ls -l'
+                sh 'npm run build'
+                sh 'ls -l'
+                zip archive: true, dir: 'build', glob: '', zipFile: 'build.zip'
+                archiveArtifacts artifacts: 'build.zip', followSymlinks: false
+                stash(includes: 'build.zip', name: 'build')
+            }
+        }
+    }
+        }
+    }
+}
