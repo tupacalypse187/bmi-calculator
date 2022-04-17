@@ -20,7 +20,7 @@ pipeline {
                 sh 'npm test' 
                 sh 'ls -l' 
                 archiveArtifacts artifacts: 'coverage/*.*', followSymlinks: false
-                cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage/coberturacoverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealt hy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', m axNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable : false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+                cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage/coberturacoverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', m axNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable : false, sourceEncoding: 'ASCII', zoomCoverageChart: false
             }
         }
     }
