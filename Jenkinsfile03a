@@ -27,5 +27,21 @@ pipeline {
         }
     }
         }
+        stage('Docker Image') {
+            agent {
+                docker { image 'docker' }
+            }
+            steps {
+                unstash 'build'
+                unzip dir: 'build', glob: '', zipFile: 'build.zip'
+                sh 'docker info'
+                sh 'ls -l'
+                sh 'docker build -f Dockerfile -t mitesh51/bmi-calc:1.0 .'
+                sh 'docker images'
+                withDockerRegistry([ credentialsId: "dockerhubcred", url: "" ]) {
+                sh 'docker push mitesh51/bmi-calc:1.0'
+                }
+            }
+        }
     }
 }
