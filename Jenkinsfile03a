@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('NPM') {
             steps {
-                sh 'ls -a'
+                sh 'ls -la'
                 sh 'rm -rf build.zip'
                 sh 'rm -rf build'
                 sh 'node --version'
@@ -17,12 +17,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ls -l'
+                sh 'ls -la'
                 sh 'npm run build'
-                sh 'ls -l'
+                sh 'ls -la'
                 zip archive: true, dir: 'build', glob: '', zipFile: 'build.zip'
                 archiveArtifacts artifacts: 'build.zip', followSymlinks: false
                 stash(includes: 'build.zip', name: 'build')
+                sh 'ls -la'
             }
         }
     }
