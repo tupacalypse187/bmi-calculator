@@ -55,7 +55,7 @@ pipeline {
             }
             steps {
                 sh 'trivy help'
-                sh "trivy --cache-dir /tmp i 'mitesh51/bmi-calc:1.0'"
+                sh "trivy --cache-dir /tmp i 'tupacalypse187/bmi-calc:1.0'"
             }
         }
     }
